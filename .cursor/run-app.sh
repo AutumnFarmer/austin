@@ -7,6 +7,10 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO_ROOT}"
 
+# Ensure MySQL/Redis are up before launching, so the terminal is self-sufficient
+# even if the boot-time start script has not (yet) run. start.sh is idempotent.
+bash "${REPO_ROOT}/.cursor/start.sh"
+
 export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
 export PATH="${JAVA_HOME}/bin:${PATH}"
 
