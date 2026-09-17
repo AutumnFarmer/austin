@@ -1,0 +1,18 @@
+{
+  "name": "austin",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "austin-web",
+      "command": "bash .cursor/run-app.sh",
+      "description": "austin-web Spring Boot app (message-push platform) on http://localhost:7777 (Swagger UI at /swagger-ui/index.html)."
+    }
+  ],
+  "ports": [
+    {
+      "name": "austin-web",
+      "port": 7777
+    }
+  ]
+}
