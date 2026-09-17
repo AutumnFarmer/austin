@@ -19,7 +19,12 @@ echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] https://packages.adoptium.n
   | sudo tee /etc/apt/sources.list.d/adoptium.list >/dev/null
 
 sudo apt-get update -y
-sudo apt-get install -y temurin-8-jdk maven docker.io fuse-overlayfs redis-tools
+# --force-conf* keeps existing config files and avoids interactive conffile prompts
+# (e.g. /etc/fuse.conf) that would otherwise stall a non-interactive install.
+sudo apt-get install -y \
+  -o Dpkg::Options::="--force-confdef" \
+  -o Dpkg::Options::="--force-confold" \
+  temurin-8-jdk maven docker.io fuse-overlayfs redis-tools
 
 # --- Docker daemon config + pre-pull middleware images into the image cache ---
 source "${REPO_ROOT}/.cursor/docker-lib.sh"
